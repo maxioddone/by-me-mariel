@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>By Me Mariel · Porcelana pintada a mano</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#eadcf5;--sur:#faf0f6;--rose:#f3d4e5;--sage:#d8c0ed;--gold:#8060a7;--ink:#493950;--mut:#64536f;--line:#c9b0dc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:300 16px/1.65 Jost,system-ui,sans-serif}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.1;margin:0}
+h1{font-size:clamp(2.6rem,8vw,5rem)}h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:.5rem}h3{font-size:1.35rem}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.w{max-width:1100px;margin:0 auto;padding:0 20px}.sec{padding:72px 0}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--rose) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font:italic 500 1.5rem 'Cormorant Garamond',serif;background:none;border:0;padding:0;margin-right:auto}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button,.cartb{background:none;border:0;padding:6px 10px;border-radius:99px;font-size:.92rem}
+nav button:hover,nav button.on{background:var(--rose)}
+.cartb{border:1px solid var(--line)}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;padding:12px 26px;border-radius:99px;text-decoration:none;font-weight:400}
+.btn.alt{background:none;color:var(--ink);border:1px solid var(--gold)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;min-height:72vh}
+.hero p.lead{font:italic 1.5rem 'Cormorant Garamond',serif;color:var(--gold);margin:16px 0 28px}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.ph{position:relative;aspect-ratio:1;border-radius:14px;background:var(--rose);display:grid;place-items:center;overflow:hidden}
+.ph.sq{aspect-ratio:1;border-radius:10px}
+.ph svg{width:70%;height:auto}
+.tag{position:absolute;bottom:8px;left:8px;font-size:.7rem;background:var(--bg);padding:2px 8px;border-radius:99px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;align-items:start}
+.card{background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden;text-align:left;display:block;width:100%;box-shadow:0 3px 12px #49395012}
+.card h3,.card .mut,.card .price{padding:0 14px}.card h3{margin:12px 0 2px}.card .price{padding-bottom:14px}.card .ph,.card .ph.has{border-radius:0}.price{color:var(--gold);font-weight:500}.mut{color:var(--mut);font-size:.9rem}
+.sold{position:absolute;top:10px;right:10px;background:var(--ink);color:var(--bg);font-size:.75rem;padding:2px 10px;border-radius:99px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:24px}
+.col{border:1px solid var(--line);border-radius:10px;padding:22px 16px;background:var(--rose);text-align:center;font:italic 1.3rem 'Cormorant Garamond',serif}
+.col:hover{border-color:var(--gold)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 28px}
+input,select,textarea{background:var(--sur);border:1px solid var(--line);border-radius:8px;padding:10px 12px;width:100%}
+.bar input{flex:2;min-width:160px}.bar select{flex:1;min-width:130px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:none;border-radius:99px;padding:4px 14px;font-size:.88rem}.chip.on{background:var(--sage);border-color:var(--gold);color:var(--ink)}
+.det{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.th{width:64px;height:64px;padding:0;border:2px solid var(--line);border-radius:8px;background:none;overflow:hidden;opacity:.7}.th.on{border-color:var(--gold);opacity:1}.th img{width:100%;height:100%;object-fit:contain;display:block}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:99px}.qty button{border:0;background:none;width:34px;height:34px;font-size:1.1rem}
+.line{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.line .ph{width:64px;border-radius:8px;flex:none}.line .ph svg{width:80%}
+form.f{display:grid;gap:14px;grid-template-columns:1fr 1fr}.f .full{grid-column:1/-1}.f label{font-size:.88rem;display:block;margin-bottom:4px}
+.about{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center}
+.note{background:var(--rose);border-radius:10px;padding:12px 16px;font-size:.88rem;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+.wrap{overflow-x:auto}
+.ph.has{aspect-ratio:auto;display:block;background:none!important;border-radius:14px}.ph img{width:100%;height:auto;display:block}.hero .ph.has img,.det .ph.has img{max-height:80vh;object-fit:contain}.line .ph.has,.mini .ph.has{aspect-ratio:1;display:grid;place-items:center}.line .ph img,.mini .ph img{width:100%;height:100%;object-fit:contain}.ph:not(.has) svg{opacity:.55}.zb{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.line .tag,.line .sold,.mini .tag,.mini .sold{display:none}.mini{width:48px}.mini .ph{border-radius:8px}
+.pv{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.pv img{width:72px;height:72px;object-fit:contain;border:1px solid var(--line);border-radius:8px;background:var(--rose)}
+.lb{position:fixed;inset:0;z-index:20;background:#493950ec;display:grid;place-items:center;padding:20px}.lbs{max-width:100%;max-height:calc(100% - 30px);overflow:auto;display:grid;place-items:center}.lbs img{max-width:min(92vw,1000px);max-height:80vh;object-fit:contain;cursor:zoom-in;border-radius:8px}.lbs.z{place-items:start}.lbs.z img{max-width:none;max-height:none;width:200%;cursor:zoom-out}
+.lbx,.lbn{position:absolute;background:#fcf8fd;color:#493950;border:0;border-radius:99px;width:42px;height:42px;font-size:1.5rem;line-height:1}.lbx{top:calc(14px + env(safe-area-inset-top,0px));right:16px}.lbn{top:50%}.lp{left:12px}.ln{right:12px}.lbh{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));color:#fcf8fd;font-size:.85rem;margin:0}
+.wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:#493950;color:#fcf8fd;border-radius:99px;padding:12px 20px;text-decoration:none;z-index:6;box-shadow:0 4px 14px #0003}
+footer{border-top:1px solid var(--line);padding:36px 0 90px;text-align:center;background:var(--rose)}
+.hero-in{animation:in .9s ease both}@keyframes in{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){.hero-in{animation:none}}
+@media(max-width:760px){.hero,.det,.about,form.f{grid-template-columns:1fr}.ph:not(.has){max-width:340px}header .w{flex-wrap:wrap;height:auto;padding:8px 20px}.sec{padding:48px 0}}
+</style></head><body>
+<header><div class="w"><button class="logo" onclick="go('inicio')">By Me Mariel</button>
+<nav id="nav"></nav><button class="cartb" onclick="go('carrito')" id="cb">Carrito (0)</button></div></header>
+<main id="app"></main>
+<a class="wa" id="wa" target="_blank" rel="noopener">WhatsApp</a>
+<footer><div class="w"><h3>By Me Mariel</h3><p class="mut">Piezas únicas, historias pintadas a mano.</p>
+<p><a href="https://www.instagram.com/by.me.mariel/" target="_blank" rel="noopener">Instagram @by.me.mariel</a></p>
+</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+const CFG=window.BMM||{};let WA=CFG.whatsapp||'5490000000000';
+let sb=null,sess=null,isAdm=false,P=[],AP=[],cats=[],styles=[],CATS=[],STYS=[],loaded=false,loadErr='',msg=null,busy=false;
+const EMPTY='<p class="mut">Pronto vas a ver acá las piezas de Mariel.</p>';
+const PH={id:1,cod:'-',n:'',cat:'Tazas',est:'',st:1,st2:'Disponible'};
+const cols=['#e9ddf5','#f7dce8','#d8c4ef','#f3e3f0','#e4d6f3','#f9e6ef'];
+const cup=(c,t)=>`<svg viewBox="0 0 120 100" aria-hidden="true">${t==='Teteras'?'<path d="M30 40h50v30a20 20 0 0 1-20 20H50a20 20 0 0 1-20-20z" fill="#fff"/><path d="M80 48h14l-6 14H80M30 48l-14-8M52 40v-6h6v6" stroke="#9273b5" fill="none" stroke-width="2"/>':t==='Platos'||t==='Bandejas'?'<ellipse cx="60" cy="62" rx="48" ry="20" fill="#fff"/><ellipse cx="60" cy="60" rx="32" ry="11" fill="none" stroke="#9273b5" stroke-width="2"/>':'<path d="M28 38h54v24a22 22 0 0 1-22 22h-10a22 22 0 0 1-22-22z" fill="#fff"/><path d="M82 46h8a9 9 0 0 1 0 18h-8" fill="none" stroke="#fff" stroke-width="5"/>'}<circle cx="55" cy="58" r="7" fill="${c}" opacity=".9"/><path d="M48 50q7-10 14 0" stroke="#9273b5" fill="none" stroke-width="2"/></svg>`;
+const money=n=>'$'+n.toLocaleString('es-AR');
+// FOTOS: se completa desde Supabase Storage (por código de producto): la principal primero, luego las adicionales.
+const FOTOS={};
+const foto=(p,i=0)=>(FOTOS[p.cod]||[])[i];
+const bdg=p=>{const t=p.st2==='Trabajo realizado'?'Trabajo realizado':p.st2==='A pedido'?'A pedido':p.st<1?'Agotada':'';return t?`<span class="sold">${t}</span>`:''};
+const ph=(p,cls='',i=0)=>{const f=foto(p,i);return `<div class="ph ${cls}${f?' has':''}" style="background:${cols[p.id%6]}">${f?`<img src="${f}" alt="${p.n}">`:cup(['#d98fb0','#9273b5','#c9a0d8','#b48fc9'][p.id%4],p.cat)+'<span class="tag">Sin foto aún</span>'}${bdg(p)}</div>`};
+let view='inicio',cart={},cur=null,F={q:'',cat:'',sort:'',sty:''},adm='Pedidos',gal='',pre='',gi=0,ed=null;
+const $=s=>document.querySelector(s);
+const go=(v,x)=>{msg=null;view=v;if(v==='detalle'){cur=x;gi=0}if(v==='encargo')pre=x||'';render();scrollTo(0,0)};
+const wl=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
+function nav(){const n=[['tienda','Tienda'],['galeria','Galería'],['encargo','Encargos'],['sobre','Sobre Mariel'],['admin','Admin']];
+$('#nav').innerHTML=n.map(([k,l])=>`<button class="${view===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('');
+$('#cb').textContent='Carrito ('+Object.values(cart).reduce((a,b)=>a+b,0)+')';$('#wa').href=wl('Hola Mariel, quisiera consultarte por una pieza.')}
+const add=id=>{const p=P.find(x=>x.id==id);if(p.st2==='Disponible'&&(cart[id]||0)<p.st){cart[id]=(cart[id]||0)+1;render()}};
+const chg=(id,d)=>{const p=P.find(x=>x.id==id);cart[id]=Math.max(0,Math.min(p.st,(cart[id]||0)+d));if(!cart[id])delete cart[id];render()};
+const prodCard=p=>`<button class="card" onclick="go('detalle',${p.id})">${ph(p)}<h3>${p.n}</h3><div class="mut">${p.cat} · ${p.est}</div><div class="price">${priceOf(p,1)}</div></button>`;
+const priceOf=(p,s)=>p.st2==='Trabajo realizado'?'Trabajo realizado':p.st2==='A pedido'?money(p.pr)+(s?' <span class="mut">· a pedido</span>':' <span class="mut">precio de referencia</span>'):p.st<1?'Agotada':money(p.pr);
+const stockOf=p=>p.st2==='A pedido'?'Se confecciona a pedido: el plazo lo confirma Mariel':p.st2==='Trabajo realizado'?'Pieza realizada, no disponible para compra':`Stock: ${p.st} ${p.st===1?'unidad':'unidades'}`;
+const acts=p=>p.st2==='A pedido'?`<button class="btn" onclick="go('encargo','${p.n}')">Solicitar encargo</button><a class="btn alt" target="_blank" rel="noopener" href="${wl('Hola Mariel, quisiera consultar por la pieza «'+p.n+'» ('+p.cod+').')}">Consultar por WhatsApp</a>`:p.st2==='Trabajo realizado'?`<button class="btn" disabled>Trabajo realizado</button><button class="btn alt" onclick="go('encargo','${p.n}')">Quiero algo similar</button>`:`<button class="btn" ${p.st<1?'disabled':''} onclick="add(${p.id});go('carrito')">${p.st<1?'Sin stock':'Agregar al carrito'}</button>${p.per?`<button class="btn alt" onclick="go('encargo','${p.n}')">Quiero algo similar</button>`:''}`;
+const gallery=p=>{const l=FOTOS[p.cod]||[];if(!l.length)return ph(p,'sq');const i=Math.min(gi,l.length-1);return `<button class="zb" onclick="zoom(${p.id},${i})" aria-label="Ampliar fotografía">${ph(p,'sq',i)}</button><p class="mut" style="margin:6px 0 0">Tocá la foto para ampliarla</p>${l.length>1?`<div class="thumbs">${l.map((f,k)=>`<button class="th ${k===i?'on':''}" onclick="gi=${k};render()" aria-label="Ver foto ${k+1}"><img src="${f}" alt=""></button>`).join('')}</div>`:''}`};
+function zoom(id,i){const p=P.find(x=>x.id==id),l=FOTOS[p.cod]||[];let k=i,z=0;const o=document.createElement('div');o.className='lb';o.setAttribute('role','dialog');o.setAttribute('aria-label','Fotografía ampliada');
+const dr=()=>{o.innerHTML=`<div class="lbs${z?' z':''}"><img src="${l[k]}" alt="${p.n}"></div><button class="lbx" aria-label="Cerrar">×</button>${l.length>1?'<button class="lbn lp" aria-label="Foto anterior">‹</button><button class="lbn ln" aria-label="Foto siguiente">›</button>':''}<p class="lbh">${z?'Tocá para alejar':'Tocá la foto para acercar'}</p>`};
+const nx=d=>{k=(k+d+l.length)%l.length;z=0;dr()};const cl=()=>{o.remove();removeEventListener('keydown',kd)};
+const kd=e=>{if(e.key==='Escape')cl();if(l.length>1&&e.key==='ArrowLeft')nx(-1);if(l.length>1&&e.key==='ArrowRight')nx(1)};
+o.onclick=e=>{const t=e.target;if(t.closest('.lbx')||t===o)cl();else if(t.closest('.lp'))nx(-1);else if(t.closest('.ln'))nx(1);else if(t.tagName==='IMG'){z=z?0:1;dr()}};
+addEventListener('keydown',kd);dr();document.body.appendChild(o);o.querySelector('.lbx').focus()}
+const eo=(a,v)=>a.map(x=>`<option ${x===v?'selected':''}>${x}</option>`).join('');const ES=['Disponible','A pedido','Trabajo realizado'];
+const oi=(a,v)=>a.map(x=>`<option value="${x.id}" ${x.id===v?'selected':''}>${x.name}</option>`).join('');
+const gp=id=>AP.find(x=>x.id==id);
+const mh=()=>msg?`<div class="note"${msg.e?' role="alert"':''}>${msg.e?'<b>Error:</b> ':''}${msg.m}</div>`:'';
+const stMap={disponible:'Disponible',a_pedido:'A pedido',trabajo_realizado:'Trabajo realizado'},stRev={'Disponible':'disponible','A pedido':'a_pedido','Trabajo realizado':'trabajo_realizado'};
+const pub=path=>sb.storage.from('product-images').getPublicUrl(path).data.publicUrl;
+function prev(i,id){$('#'+id).innerHTML=[...i.files].map(f=>`<img src="${URL.createObjectURL(f)}" alt="">`).join('')}
+function fail(e){const m=(e&&e.message)||String(e),c=e&&e.code;msg={e:1,m:c==='42501'||/row-level security|permission denied|not authorized/i.test(m)?'No tenés permiso para esa operación. Iniciá sesión como administradora.':c==='23505'?'Ya existe un registro con ese nombre o código.':c==='23503'?'No se puede eliminar: tiene datos asociados (por ejemplo, pedidos). Conviene archivarlo.':c==='23514'?'Hay un dato no válido (por ejemplo, un precio o un stock negativo).':'Ocurrió un error: '+m};render()}
+const ok=m=>{msg={m};render()};
+function mk(){if(!window.supabase||!CFG.url||!CFG.key){loadErr='Falta configurar la conexión con Supabase (config.js).';return}sb=supabase.createClient(CFG.url,CFG.key)}
+async function load(){try{
+ const [c,s2,p]=await Promise.all([sb.from('categories').select('*').order('sort_order').order('name'),sb.from('styles').select('*').order('sort_order').order('name'),sb.from('products').select('*,product_images(id,path,position,is_main,created_at)').order('created_at',{ascending:false})]);
+ const er=c.error||s2.error||p.error;if(er)throw er;
+ CATS=c.data;STYS=s2.data;const cn=Object.fromEntries(CATS.map(x=>[x.id,x.name])),sn=Object.fromEntries(STYS.map(x=>[x.id,x.name]));
+ AP=p.data.map((r,i)=>({id:i+1,uid:r.id,cod:r.code,n:r.name,d:r.description,cat:cn[r.category_id]||'',est:sn[r.style_id]||'',cid:r.category_id||'',sid:r.style_id||'',pr:Number(r.price_ars),st:r.stock,dim:r.dimensions,per:r.allows_customization,st2:stMap[r.status],pub:r.is_published,arch:!!r.archived_at,imgs:(r.product_images||[]).sort((a,b)=>a.position-b.position||(a.created_at>b.created_at?1:-1))}));
+ P=AP.filter(p=>p.pub&&!p.arch);cats=CATS.filter(x=>x.is_active).map(x=>x.name);styles=STYS.filter(x=>x.is_active).map(x=>x.name);
+ for(const k in FOTOS)delete FOTOS[k];AP.forEach(p=>{FOTOS[p.cod]=[...p.imgs].sort((a,b)=>b.is_main-a.is_main).map(i=>pub(i.path))});loadErr=''
+ }catch(e){loadErr='No se pudo cargar el catálogo. Revisá tu conexión e intentá de nuevo.'}
+ loaded=true;render()}
+async function checkAdm(){isAdm=false;if(sess){const r=await sb.from('admins').select('user_id').eq('user_id',sess.user.id).maybeSingle();isAdm=!!r.data}}
+async function init(){mk();if(!sb){loaded=true;return render()}const r=await sb.auth.getSession();sess=r.data.session;await checkAdm();await load()}
+async function login(ev){ev.preventDefault();if(busy)return;const f=new FormData(ev.target);busy=true;const r=await sb.auth.signInWithPassword({email:f.get('e').trim(),password:f.get('p')});busy=false;
+ if(r.error){msg={e:1,m:/invalid/i.test(r.error.message)?'Correo o contraseña incorrectos.':'No se pudo iniciar sesión: '+r.error.message};return render()}
+ sess=r.data.session;await checkAdm();msg=isAdm?{m:'Sesión iniciada.'}:{e:1,m:'Esta cuenta no tiene permisos de administración.'};await load()}
+async function logout(){await sb.auth.signOut();sess=null;isAdm=false;msg=null;ed=null;await load()}
+async function shrink(f){const b=await createImageBitmap(f),k=Math.min(1,1600/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise((res,rej)=>c.toBlob(x=>x?res(x):rej({message:'No se pudo procesar la imagen '+f.name}),'image/jpeg',.88))}
+async function upl(uid,files){const p=AP.find(x=>x.uid===uid);let pos=p&&p.imgs.length?Math.max(...p.imgs.map(i=>i.position))+1:0;
+ for(const f of files){const b=await shrink(f),path=`products/${uid}/${crypto.randomUUID()}.jpg`;
+  const u=await sb.storage.from('product-images').upload(path,b,{contentType:'image/jpeg',cacheControl:'31536000'});if(u.error)throw u.error;
+  const r=await sb.from('product_images').insert({product_id:uid,path,alt:'',position:pos++});if(r.error){await sb.storage.from('product-images').remove([path]);throw r.error}}}
+async function saveProd(ev){ev.preventDefault();if(busy)return;const fm=new FormData(ev.target),e=ed?gp(ed):null;
+ const row={code:fm.get('code').trim(),name:fm.get('name').trim(),description:fm.get('description').trim(),category_id:fm.get('category_id')||null,style_id:fm.get('style_id')||null,price_ars:Number(fm.get('price_ars')),stock:parseInt(fm.get('stock'),10),dimensions:fm.get('dimensions').trim(),status:stRev[fm.get('status')],allows_customization:fm.get('per')==='Sí',is_published:fm.get('pub')==='Publicado'};
+ if(e&&e.arch)row.is_published=false;busy=true;let uid=e&&e.uid;
+ try{if(e){const r=await sb.from('products').update(row).eq('id',uid).select('id');if(r.error)throw r.error;if(!r.data.length)throw{message:'row-level security'}}
+  else{const r=await sb.from('products').insert(row).select('id').single();if(r.error)throw r.error;uid=r.data.id}}catch(x){busy=false;return fail(x)}
+ const files=[...fm.getAll('files')].filter(f=>f&&f.size);
+ try{if(files.length)await upl(uid,files)}catch(x){await load();ed=(AP.find(p=>p.uid===uid)||{}).id||null;busy=false;return fail(x)}
+ await load();ed=null;busy=false;ok(e?'Producto actualizado.':'Producto creado.')}
+async function imgAct(id,iid,a){const p=gp(id);if(!p||busy)return;busy=true;try{
+ if(a==='main'){const r=await sb.rpc('set_main_image',{p_image:iid});if(r.error)throw r.error}
+ else if(a==='del'){if(!confirm('¿Quitar esta fotografía?')){busy=false;return}const im=p.imgs.find(i=>i.id===iid),r=await sb.from('product_images').delete().eq('id',iid).select('id');if(r.error)throw r.error;if(!r.data.length)throw{message:'row-level security'};await sb.storage.from('product-images').remove([im.path])}
+ else{const ids=p.imgs.map(i=>i.id),k=ids.indexOf(iid),j=a==='up'?k-1:k+1;[ids[k],ids[j]]=[ids[j],ids[k]];const r=await sb.rpc('reorder_product_images',{p_product:p.uid,p_ids:ids});if(r.error)throw r.error}
+ await load();busy=false;render()}catch(x){busy=false;fail(x)}}
+async function tgl(id,w){const p=gp(id);if(!p)return;let row,t;
+ if(w==='pub'){row={is_published:!p.pub};t=p.pub?'Producto desactivado.':'Producto publicado.'}
+ else if(p.arch){row={archived_at:null};t='Producto restaurado (queda desactivado hasta que lo publiques).'}
+ else{if(!confirm('¿Archivar este producto? Dejará de verse en la tienda.'))return;row={archived_at:new Date().toISOString(),is_published:false};t='Producto archivado.'}
+ const r=await sb.from('products').update(row).eq('id',p.uid).select('id');if(r.error||!r.data.length)return fail(r.error||{message:'row-level security'});await load();ok(t)}
+async function del(id){const p=gp(id);if(!p||!confirm('¿Eliminar definitivamente «'+p.n+'»? También se borran sus fotografías. Si tiene pedidos asociados, conviene archivarlo.'))return;
+ const r=await sb.from('products').delete().eq('id',p.uid).select('id');if(r.error)return fail(r.error);if(!r.data.length)return fail({message:'row-level security'});
+ if(p.imgs.length)await sb.storage.from('product-images').remove(p.imgs.map(i=>i.path));await load();ed=null;ok('Producto eliminado.')}
+async function qk(id,col,v){const p=gp(id),n=Number(v);if(!(n>=0)){msg={e:1,m:'Ingresá un número válido.'};return render()}
+ const r=await sb.from('products').update({[col]:col==='stock'?Math.trunc(n):n}).eq('id',p.uid).select('id');if(r.error||!r.data.length)return fail(r.error||{message:'row-level security'});await load();ok('Cambio guardado.')}
+async function cat(t,id){const x=(t==='categories'?CATS:STYS).find(y=>y.id===id),r=await sb.from(t).update({is_active:!x.is_active}).eq('id',id).select('id');if(r.error||!r.data.length)return fail(r.error||{message:'row-level security'});await load();ok('Cambio guardado.')}
+async function catAdd(ev,t){ev.preventDefault();const n=new FormData(ev.target).get('n').trim(),slug=n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+ const r=await sb.from(t).insert({name:n,slug,sort_order:(t==='categories'?CATS:STYS).length+1});if(r.error)return fail(r.error);await load();ok('Agregado.')}
+function catAdmin(){const blk=(t,l,k)=>`<h3>${t}</h3><div class="wrap"><table>${l.map(x=>`<tr><td>${x.name}</td><td>${x.is_active?'Activa':'Oculta'}</td><td><button class="chip" onclick="cat('${k}','${x.id}')">${x.is_active?'Ocultar':'Mostrar'}</button></td></tr>`).join('')||'<tr><td class="mut">Sin elementos.</td></tr>'}</table></div><form class="f" style="grid-template-columns:1fr auto;margin:10px 0 24px" onsubmit="catAdd(event,'${k}')"><input name="n" placeholder="Nuevo nombre" required><button class="btn">Agregar</button></form>`;return blk('Categorías',CATS,'categories')+blk('Estilos o colecciones',STYS,'styles')}
+function prodAdmin(){const e=ed===null?null:(ed?gp(ed):{imgs:[],st2:'Disponible',pub:false});
+const rows=AP.map(p=>`<tr><td><div class="mini">${ph(p,'sq')}</div></td><td>${p.cod}</td><td>${p.n}</td><td><input type="number" min="0" value="${p.pr}" style="width:110px" onchange="qk(${p.id},'price_ars',this.value)"></td><td><input type="number" min="0" value="${p.st}" style="width:70px" onchange="qk(${p.id},'stock',this.value)"></td><td>${p.st2}</td><td>${p.arch?'Archivado':p.pub?'Publicado':'Desactivado'}</td><td style="white-space:nowrap"><button class="chip" onclick="ed=${p.id};msg=null;render()">Editar</button> <button class="chip" ${p.arch?'disabled':''} onclick="tgl(${p.id},'pub')">${p.pub?'Desactivar':'Publicar'}</button> <button class="chip" onclick="tgl(${p.id},'arch')">${p.arch?'Restaurar':'Archivar'}</button> <button class="chip" onclick="del(${p.id})">Eliminar</button></td></tr>`).join('')||'<tr><td colspan="8" class="mut">Todavía no hay productos. Creá el primero con “+ Nuevo producto”.</td></tr>';
+const f=e?`<h3>${e.id?'Editar producto':'Nuevo producto'}</h3><br><form class="f" onsubmit="saveProd(event)"><div><label>Código</label><input name="code" required value="${e.cod||''}"></div><div><label>Nombre</label><input name="name" required value="${e.n||''}"></div><div class="full"><label>Descripción</label><textarea name="description" rows="3">${e.d||''}</textarea></div><div><label>Categoría</label><select name="category_id"><option value="">Sin categoría</option>${oi(CATS,e.cid)}</select></div><div><label>Estilo o temática</label><select name="style_id"><option value="">Sin estilo</option>${oi(STYS,e.sid)}</select></div><div><label>Precio (ARS)</label><input name="price_ars" type="number" min="0" step="0.01" required value="${e.pr??''}"></div><div><label>Cantidad disponible</label><input name="stock" type="number" min="0" step="1" required value="${e.st??0}"></div><div><label>Dimensiones y capacidad</label><input name="dimensions" value="${e.dim||''}"></div><div><label>Estado</label><select name="status">${eo(ES,e.st2)}</select></div><div><label>Admite personalización</label><select name="per">${eo(['Sí','No'],e.per?'Sí':'No')}</select></div><div><label>Publicación</label><select name="pub">${eo(['Publicado','Desactivado'],e.pub?'Publicado':'Desactivado')}</select></div><div class="full"><label>Agregar fotografías (podés elegir varias)</label><input type="file" name="files" accept="image/jpeg,image/png,image/webp" multiple onchange="prev(this,'pa')"><div class="pv" id="pa"></div></div>${e.imgs.length?`<div class="full"><label>Fotografías cargadas (la principal se muestra primero)</label><div class="pv">${e.imgs.map((i,k)=>`<div style="text-align:center;font-size:.8rem"><img src="${pub(i.path)}" alt="Foto ${k+1}"><br>${i.is_main?'<b>Principal</b>':`<button type="button" class="chip" onclick="imgAct(${e.id},'${i.id}','main')">Principal</button>`}<br><button type="button" class="chip" aria-label="Mover antes" ${k?'':'disabled'} onclick="imgAct(${e.id},'${i.id}','up')">‹</button><button type="button" class="chip" aria-label="Mover después" ${k<e.imgs.length-1?'':'disabled'} onclick="imgAct(${e.id},'${i.id}','down')">›</button><button type="button" class="chip" onclick="imgAct(${e.id},'${i.id}','del')">Quitar</button></div>`).join('')}</div></div>`:''}<div class="full" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" ${busy?'disabled':''}>Guardar</button><button type="button" class="btn alt" onclick="ed=null;render()">Cancelar</button></div></form>`:'';
+return `<div class="wrap"><table><tr><th>Foto</th><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Visibilidad</th><th>Acciones</th></tr>${rows}</table></div><br><button class="btn alt" onclick="ed=0;msg=null;render()">+ Nuevo producto</button><br><br>${f}`}
+const V={
+admin:()=>{if(!sb)return`<div class="w sec"><h2>Panel de administración</h2><div class="note">Falta configurar la conexión con Supabase (config.js).</div></div>`;
+if(!sess)return`<div class="w sec" style="max-width:420px"><h2>Acceso administradora</h2>${mh()}<form class="f" style="grid-template-columns:1fr" onsubmit="login(event)"><div><label>Correo electrónico</label><input name="e" type="email" required autocomplete="username"></div><div><label>Contraseña</label><input name="p" type="password" required autocomplete="current-password"></div><div><button class="btn" ${busy?'disabled':''}>Iniciar sesión</button></div></form></div>`;
+if(!isAdm)return`<div class="w sec" style="max-width:520px"><h2>Acceso administradora</h2>${mh()}<div class="note">Esta cuenta no tiene permisos de administración.</div><button class="btn alt" onclick="logout()">Cerrar sesión</button></div>`;
+return V.admin0()},
+inicio:()=>`<div class="w hero"><div class="hero-in"><h1>By Me Mariel</h1><p class="lead">Piezas únicas, historias pintadas a mano.</p><p>Pintura artística sobre tazas, teteras, platos y juegos de té. Cada pieza se hace con tiempo, pincel y cariño en Argentina.</p><br><div class="row"><button class="btn" onclick="go('tienda')">Ver la tienda</button><button class="btn alt" onclick="go('encargo')">Tu idea, nuestra creación</button></div></div>${ph(P[0]||PH)}</div>
+<section class="sec"><div class="w"><h2>Piezas destacadas</h2><p class="mut">Listas para llevar a casa o regalar.</p><br><div class="grid">${(P.filter(p=>p.st2==='Disponible'&&p.st>0).slice(0,4).map(prodCard).join('')||EMPTY)}</div></div></section>
+<section class="sec" style="background:var(--sur)"><div class="w"><h2>Colecciones por estilo</h2><div class="cols">${styles.map(s=>`<button class="col" onclick="F.sty='${s}';go('tienda')">${s}</button>`).join('')}</div></div></section>
+<section class="sec"><div class="w"><h2>Trabajos realizados</h2><p class="mut">Una muestra de lo que se puede crear para vos.</p><br><div class="grid">${(P.slice(0,4).map(p=>ph(p,'sq')).join('')||EMPTY)}</div><br><button class="btn alt" onclick="go('galeria')">Ver toda la galería</button></div></section>
+<section class="sec" style="background:var(--rose)"><div class="w about"><div class="ph" style="background:var(--bg)"><span class="tag" style="position:static">Foto de Mariel (pendiente)</span></div><div><h2>Hola, soy Mariel</h2><p>Texto de ejemplo: aquí irá la historia real de Mariel, su camino con la pintura sobre porcelana y su proceso de trabajo.</p><button class="btn" onclick="go('sobre')">Conocer más</button></div></div></section>`,
+tienda:()=>{let l=P.filter(p=>(!F.cat||p.cat===F.cat)&&(!F.sty||p.est===F.sty)&&(p.n+p.cod+p.est).toLowerCase().includes(F.q.toLowerCase()));
+if(F.sort==='a')l.sort((a,b)=>a.pr-b.pr);if(F.sort==='d')l.sort((a,b)=>b.pr-a.pr);
+return`<div class="w sec"><h2>Tienda</h2><div class="bar"><input id="q" placeholder="Buscar por nombre o código" value="${F.q}" oninput="F.q=this.value;sr()"><select onchange="F.sort=this.value;render()"><option value="">Ordenar</option><option value="a" ${F.sort==='a'?'selected':''}>Precio: menor a mayor</option><option value="d" ${F.sort==='d'?'selected':''}>Precio: mayor a menor</option></select><select onchange="F.sty=this.value;render()"><option value="">Todos los estilos</option>${styles.map(s=>`<option ${F.sty===s?'selected':''}>${s}</option>`).join('')}</select></div>
+<div class="chips"><button class="chip ${F.cat?'':'on'}" onclick="F.cat='';render()">Todo</button>${cats.map(c=>`<button class="chip ${F.cat===c?'on':''}" onclick="F.cat='${c}';render()">${c}</button>`).join('')}</div>
+<div class="grid" id="pg">${l.map(prodCard).join('')||(P.length?'<p class="mut">No hay piezas con esos filtros. Probá quitar alguno.</p>':'<p class="mut">Todavía no hay piezas cargadas. Pronto vas a ver acá las creaciones de Mariel.</p>')}</div></div>`},
+detalle:()=>{const p=P.find(x=>x.id==cur);if(!p)return V.tienda();return`<div class="w sec"><button class="chip" onclick="go('tienda')">‹ Volver a la tienda</button><br><br><div class="det"><div>${gallery(p)}</div><div><h1 style="font-size:2.6rem">${p.n}</h1><p class="mut">Código ${p.cod} · ${p.cat} · ${p.est}</p><p class="price" style="font-size:1.6rem">${priceOf(p)}</p><p>${p.d}</p><p class="mut">Dimensiones y capacidad: ${p.dim}<br>Estado: ${p.st2}<br>${stockOf(p)}<br>Admite personalización: ${p.per?'sí':'no'}</p><br><div class="row" style="display:flex;gap:10px;flex-wrap:wrap">${acts(p)}</div></div></div></div>`},
+carrito:()=>{const it=Object.keys(cart).map(id=>P.find(p=>p.id==id)).filter(Boolean);const tot=it.reduce((a,p)=>a+p.pr*cart[p.id],0);
+if(!it.length)return`<div class="w sec"><h2>Tu carrito</h2><p>Todavía no agregaste piezas.</p><button class="btn" onclick="go('tienda')">Ir a la tienda</button></div>`;
+return`<div class="w sec"><h2>Tu carrito</h2>${it.map(p=>`<div class="line">${ph(p,'sq')}<div style="flex:1"><b>${p.n}</b><div class="mut">${money(p.pr)} · máx. ${p.st}</div></div><span class="qty"><button aria-label="Quitar uno" onclick="chg(${p.id},-1)">−</button>${cart[p.id]}<button aria-label="Agregar uno" onclick="chg(${p.id},1)">+</button></span><b>${money(p.pr*cart[p.id])}</b></div>`).join('')}
+<p style="text-align:right;font-size:1.3rem">Subtotal: ${money(tot)}</p><h3>Tus datos</h3><br><form class="f" onsubmit="event.preventDefault();pay()"><div><label>Nombre y apellido</label><input required></div><div><label>Correo electrónico</label><input type="email" required></div><div><label>WhatsApp</label><input required></div><div><label>Entrega</label><select id="ent" onchange="$('#dir').style.display=this.value==='Envío'?'block':'none'"><option>Retiro</option><option>Envío</option></select></div><div class="full" id="dir" style="display:none"><label>Dirección de entrega</label><input></div><div class="full"><button class="btn">Continuar al pago</button></div></form>
+<div class="note"><b>Integración pendiente:</b> Mercado Pago. El pago se creará desde un backend con credenciales protegidas, y el pedido pasará a “Pagado” solo cuando el proveedor lo confirme por notificación.</div></div>`},
+encargo:()=>`<div class="w sec" style="max-width:760px"><h2>Tu idea, nuestra creación</h2><p class="mut">Contanos qué imaginás. Mariel te responde con un presupuesto; no hay precio hasta que lo apruebes.</p><br><form class="f" onsubmit="event.preventDefault();sendWA(this)"><div><label>Nombre</label><input name="n" required></div><div><label>WhatsApp</label><input name="w" required></div><div class="full"><label>Correo electrónico</label><input name="e" type="email"></div><div><label>Tipo de pieza</label><select name="t">${cats.map(c=>`<option>${c}</option>`).join('')}</select></div><div><label>Cantidad</label><input name="c" type="number" min="1" value="1"></div><div><label>Estilo o temática</label><input name="s" value="${pre}"></div><div><label>Colores preferidos</label><input name="co"></div><div><label>Texto o nombre a incorporar</label><input name="tx"></div><div><label>Fecha aproximada</label><input name="f" type="date"></div><div class="full"><label>Descripción</label><textarea name="d" rows="4"></textarea></div><div class="full"><label>Imágenes de referencia</label><input type="file" accept="image/*" multiple><span class="mut">Se adjuntan luego por WhatsApp.</span></div><div class="full"><button class="btn">Enviar por WhatsApp</button></div></form></div>`,
+galeria:()=>{const l=P.filter(p=>!gal||p.cat===gal);return`<div class="w sec"><h2>Galería artística</h2><div class="chips"><button class="chip ${gal?'':'on'}" onclick="gal='';render()">Todo</button>${cats.map(c=>`<button class="chip ${gal===c?'on':''}" onclick="gal='${c}';render()">${c}</button>`).join('')}</div><div class="grid">${l.map(p=>`<div>${ph(p,'sq')}<h3 style="margin-top:10px">${p.n}</h3><p class="mut">${p.d}</p><button class="btn alt" onclick="go('encargo','${p.n}')">Quiero algo similar</button></div>`).join('')||(P.length?'<p class="mut">Sin trabajos en esta categoría.</p>':EMPTY)}</div></div>`},
+sobre:()=>`<div class="w sec"><div class="about"><div class="ph"><span class="tag">Foto de Mariel (pendiente)</span></div><div><h2>Sobre Mariel</h2><p>Texto editable de ejemplo. Acá se contará la historia de Mariel, cómo empezó a pintar porcelana y qué la inspira.</p><h3>El proceso</h3><p>Diseño, pintura a mano, secado y horneado. Cada etapa se detalla aquí con fotos reales del taller.</p><button class="btn" onclick="go('encargo')">Pedir una pieza</button></div></div></div>`,
+admin0:()=>{const tabs=['Pedidos','Productos','Categorías','Encargos','Contenido'];const sts=['Pendiente de pago','Pagado','En preparación','Listo para entregar','Enviado','Entregado','Cancelado'];
+const body={Pedidos:`<div class="note">Todavía no hay pedidos. Se activarán en una próxima etapa, junto con Mercado Pago.</div>`,
+Productos:prodAdmin(),
+Categorías:catAdmin(),
+Encargos:`<p class="mut">Las solicitudes personalizadas aparecerán aquí con estado y presupuesto.</p><div class="note">Pendiente: base de datos para guardar solicitudes.</div>`,
+Contenido:`<div class="note">Pendiente: estos textos todavía no se guardan en la base; se conectarán en la próxima etapa.</div><form class="f" onsubmit="event.preventDefault()"><div class="full"><label>Título de portada</label><input value="By Me Mariel"></div><div class="full"><label>Frase de marca</label><input value="Piezas únicas, historias pintadas a mano."></div><div><label>WhatsApp</label><input placeholder="Número de contacto"></div><div><label>Instagram</label><input value="https://www.instagram.com/by.me.mariel/"></div><div class="full"><button class="btn">Guardar cambios</button></div></form>`}[adm];
+return`<div class="w sec"><h2>Panel de administración</h2>${mh()}<div style="text-align:right;margin-bottom:8px"><button class="chip" onclick="logout()">Cerrar sesión</button></div><div class="chips">${tabs.map(t=>`<button class="chip ${adm===t?'on':''}" onclick="adm='${t}';render()">${t}</button>`).join('')}</div>${body}</div>`}};
+function sr(){const s=$('#q').selectionStart;render();const q=$('#q');q.focus();q.setSelectionRange(s,s)}
+function pay(){alert('Integración pendiente: aquí se creará el pago en Mercado Pago desde el backend. No se aprueba ningún pago desde esta pantalla.')}
+function sendWA(f){const d=Object.fromEntries(new FormData(f));open(wl(`Hola Mariel, quiero encargar una pieza personalizada.\nNombre: ${d.n}\nTipo: ${d.t} (x${d.c})\nTemática: ${d.s}\nColores: ${d.co}\nTexto: ${d.tx}\nFecha: ${d.f}\nCorreo: ${d.e}\nDetalle: ${d.d}`),'_blank')}
+function render(){const w=sb&&!loaded&&['inicio','tienda','galeria','detalle'].includes(view);$('#app').innerHTML=(loadErr?`<div class="w"><div class="note">${loadErr}</div></div>`:'')+(w?'<div class="w sec"><p class="mut">Cargando…</p></div>':V[view]());nav()}
+render();init();
+</script></body></html>
