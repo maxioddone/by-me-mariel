@@ -22,3 +22,15 @@ Tienda estática (HTML + JavaScript) conectada a Supabase. Sin servidor propio.
 - Número real de WhatsApp en `config.js`.
 - Pedidos, encargos guardados en la base y Mercado Pago (próximas etapas).
 - Textos de "Contenido" en el panel (todavía no se guardan).
+
+## Recuperación de contraseña (código de un solo uso)
+Flujo: "¿Olvidaste tu contraseña?" → correo → código por correo → contraseña nueva (2 campos) → inicio de sesión normal.
+- Usa Supabase Auth: `resetPasswordForEmail`, `verifyOtp` (tipo `recovery`) y `updateUser`. El código vence y se consume al verificarlo.
+- La verificación y el cambio usan un cliente aparte, sin guardar sesión en el navegador: el panel no se habilita hasta iniciar sesión de forma normal.
+- Los límites de frecuencia e intentos los aplica Supabase en el servidor.
+
+Configuración necesaria en Supabase (proyecto `by-me-mariel`):
+1. **SMTP propio** (Authentication → Emails → SMTP Settings). El servicio de correo incluido solo envía a miembros del equipo de la organización y con un tope muy bajo por hora.
+2. **Plantilla "Reset password"** (Authentication → Emails → Templates): mostrar el código con `{{ .Token }}` y no incluir el enlace `{{ .ConfirmationURL }}`.
+3. **Vencimiento del código** más corto (por ejemplo 600 segundos) y **largo mínimo de contraseña** de 10 (Authentication → Sign In / Providers → Email).
+4. Dejar desactivado el registro público ("Allow new users to sign up").
