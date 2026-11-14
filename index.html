@@ -88,7 +88,7 @@ const bdg=p=>{const t=p.st2==='Trabajo realizado'?'Trabajo realizado':p.st2==='A
 const ph=(p,cls='',i=0)=>{const f=foto(p,i);return `<div class="ph ${cls}${f?' has':''}" style="background:${cols[p.id%6]}">${f?`<img src="${f}" alt="${p.n}">`:cup(['#d98fb0','#9273b5','#c9a0d8','#b48fc9'][p.id%4],p.cat)+'<span class="tag">Sin foto aún</span>'}${bdg(p)}</div>`};
 let view='inicio',cart={},cur=null,F={q:'',cat:'',sort:'',sty:''},adm='Pedidos',gal='',pre='',gi=0,ed=null;
 const $=s=>document.querySelector(s);
-const go=(v,x)=>{msg=null;rec=null;dr=null;if(v!=='carrito'&&co==='done'){co='cart';odone=null}if(v==='contacto')ct0=Date.now();view=v;if(v==='detalle'){cur=x;gi=0}if(v==='trabajo'){curG=x;gi=0}if(v==='encargo')pre=x||'';render();scrollTo(0,0)};
+const go=(v,x)=>{msg=null;rec=null;dr=null;if(v!=='carrito'&&co==='done'){co='cart';odone=null}if(v==='contacto'&&view!=='contacto'){cts='form';ctd=null;ctoken='';ct0=Date.now()}view=v;if(v==='detalle'){cur=x;gi=0}if(v==='trabajo'){curG=x;gi=0}if(v==='encargo')pre=x||'';render();scrollTo(0,0)};
 const wl=t=>'https://wa.me/'+WAn()+'?text='+encodeURIComponent(t);
 function nav(){const n=[['tienda','Tienda'],['galeria','Galería'],['encargo','Encargos'],['sobre','Sobre Mariel'],...(CFG.contactEnabled?[['contacto','Contacto']]:[]),['admin','Admin']];
 $('#nav').innerHTML=n.map(([k,l])=>`<button class="${view===k||(k==='galeria'&&view==='trabajo')?'on':''}" onclick="go('${k}')">${l}</button>`).join('');
