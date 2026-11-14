@@ -4,7 +4,7 @@ Tienda estática (HTML + JavaScript) conectada a Supabase. Sin servidor propio.
 
 ## Archivos
 - `index.html`: la tienda y el panel de administración.
-- `config.js`: URL y clave pública de Supabase, y número de WhatsApp.
+- `config.js`: URL y clave pública de Supabase.
 - `.nojekyll`: evita que GitHub Pages procese el sitio.
 
 ## Publicar en GitHub Pages
@@ -18,10 +18,17 @@ Tienda estática (HTML + JavaScript) conectada a Supabase. Sin servidor propio.
 - En el navegador solo hay la URL y la clave pública (anon). Las políticas RLS de Supabase impiden que cualquiera que no sea administradora modifique datos.
 - No subas nunca a GitHub la clave `service_role`, la contraseña de la base ni credenciales de Mercado Pago. Eso irá más adelante en Supabase (Edge Functions).
 
+## Contenido editable (panel → Contenido)
+Inicio, Sobre Mariel, Galería y Contacto se editan desde el panel y se guardan en la tabla `store_settings` de Supabase. Las fotos van al bucket `site-content`. El número de WhatsApp, el Instagram y el correo salen de ahí, no de `config.js`. Todo lo que se guarda en Contenido es público.
+
+## Galería (publicaciones)
+La galería es un portfolio independiente de la tienda: cada publicación tiene título, descripción y varias fotos. Se administra desde Admin → Contenido → Galería. La estructura en Supabase está en la carpeta `supabase/` (ver `GALERIA_PASOS.md`).
+
+## Pedidos y contacto
+El carrito registra pedidos en Supabase (sin cobro online) y Admin → Pedidos los gestiona. El formulario de contacto envía por correo. Los dos usan funciones del servidor (Edge Functions), con protección contra envíos automáticos, y se activan por separado en `config.js` (`contactEnabled`, `ordersEnabled` y `turnstileSiteKey`) cuando su parte en Supabase está lista. Los scripts SQL, las funciones y las instrucciones van en el ZIP de entrega (carpetas 2, 3 y 4); en este repositorio solo se sube lo de la carpeta 1.
+
 ## Pendiente
-- Número real de WhatsApp en `config.js`.
-- Pedidos, encargos guardados en la base y Mercado Pago (próximas etapas).
-- Textos de "Contenido" en el panel (todavía no se guardan).
+- Encargos guardados en la base y Mercado Pago (próximas etapas).
 
 ## Recuperación de contraseña (código de un solo uso)
 Flujo: "¿Olvidaste tu contraseña?" → correo → código por correo → contraseña nueva (2 campos) → inicio de sesión normal.
