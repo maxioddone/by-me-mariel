@@ -313,7 +313,7 @@ Encargos:`<p class="mut">Las solicitudes personalizadas aparecerán aquí con es
 Contenido:contAdmin()}[adm];
 return`<div class="w sec"><h2>Panel de administración</h2>${mh()}<div style="text-align:right;margin-bottom:8px"><button class="chip" onclick="logout()">Cerrar sesión</button></div><div class="chips">${tabs.map(t=>`<button class="chip ${adm===t?'on':''}" onclick="adm='${t}';render()">${t}</button>`).join('')}</div>${body}</div>`}};
 function sr(){const s=$('#q').selectionStart;render();const q=$('#q');q.focus();q.setSelectionRange(s,s)}
-const ordersOn=()=>!!(CFG.ordersEnabled&&CFG.turnstileSiteKey);
+const ordersOn=()=>!!CFG.ordersEnabled;
 const PROV=['Ciudad Autónoma de Buenos Aires','Buenos Aires','Catamarca','Chaco','Chubut','Córdoba','Corrientes','Entre Ríos','Formosa','Jujuy','La Pampa','La Rioja','Mendoza','Misiones','Neuquén','Río Negro','Salta','San Juan','San Luis','Santa Cruz','Santa Fe','Santiago del Estero','Tierra del Fuego','Tucumán'];
 const FN={customer_name:'nombre y apellido',customer_email:'correo electrónico',customer_phone:'teléfono',province:'provincia',city:'localidad',postal_code:'código postal',street:'calle y número',delivery_method:'forma de entrega',items:'productos',floor_apartment:'piso y departamento',delivery_notes:'información para la entrega',order_notes:'observaciones'};
 const cartItems=()=>Object.keys(cart).map(id=>P.find(p=>p.id==id)).filter(Boolean);
@@ -350,7 +350,7 @@ function coFail(e){const m=(e&&e.message)||'',[c,a,b]=m.split('|');let t,back=nu
  else t='No pudimos registrar tu pedido. Revisá tu conexión e intentá de nuevo: si ya se había registrado, no se duplica.';
  msg={e:1,m:t};if(back==='cart')co='cart';return back}
 async function coOk(){if(busy)return;const it=cartItems();if(!it.length||!cof)return;
- if(!ctoken){msg={e:1,m:'Completá la verificación de seguridad para confirmar el pedido.'};return render()}
+ if(CFG.turnstileSiteKey&&!ctoken){msg={e:1,m:'Completá la verificación de seguridad para confirmar el pedido.'};return render()}
  const tk=ctoken,pl={...cof,items:it.map(p=>({product_id:p.uid,quantity:cart[p.id]})),expected_total:cartTot(it)},hp=cof.website||'';delete pl.website;const sig=JSON.stringify(pl);
  if(sig!==osig){ock=crypto.randomUUID();osig=sig}pl.idempotency_key=ock;busy=true;msg=null;render();
  let res=null,j=null;
@@ -399,6 +399,6 @@ async function ordStatus(id){if(busy)return;const o=(OR||[]).find(x=>x.id===id);
  OR=null;await load();ok('Estado actualizado.')}
 async function ordNotes(id){if(busy)return;busy=true;const r=await sb.rpc('admin_set_order_notes',{p_order:id,p_notes:$('#oi').value});busy=false;if(r.error)return fail(r.error);OR=null;await load();ok('Observaciones guardadas.')}
 function sendWA(f){const d=Object.fromEntries(new FormData(f));open(wl(`Hola Mariel, quiero encargar una pieza personalizada.\nNombre: ${d.n}\nTipo: ${d.t} (x${d.c})\nTemática: ${d.s}\nColores: ${d.co}\nTexto: ${d.tx}\nFecha: ${d.f}\nCorreo: ${d.e}\nDetalle: ${d.d}`),'_blank')}
-function render(){const w=sb&&!loaded&&['inicio','tienda','galeria','detalle','sobre','trabajo'].includes(view);$('#app').innerHTML=(loadErr?`<div class="w"><div class="note">${loadErr}</div></div>`:'')+(w?'<div class="w sec"><p class="mut">Cargando…</p></div>':V[view]());nav();if(view==='contacto'&&CFG.contactEnabled&&CFG.turnstileSiteKey&&cts!=='sent')tsInit();if(view==='carrito'&&co==='review'&&ordersOn())tsInit()}
+function render(){const w=sb&&!loaded&&['inicio','tienda','galeria','detalle','sobre','trabajo'].includes(view);$('#app').innerHTML=(loadErr?`<div class="w"><div class="note">${loadErr}</div></div>`:'')+(w?'<div class="w sec"><p class="mut">Cargando…</p></div>':V[view]());nav();if(view==='contacto'&&CFG.contactEnabled&&CFG.turnstileSiteKey&&cts!=='sent')tsInit();if(view==='carrito'&&co==='review'&&ordersOn()&&CFG.turnstileSiteKey)tsInit()}
 render();init();
 </script></body></html>
