@@ -75,7 +75,7 @@ footer{border-top:1px solid var(--line);padding:36px 0 90px;text-align:center;ba
 <script>
 const CFG=window.BMM||{};
 let sb=null,sess=null,isAdm=false,P=[],AP=[],cats=[],styles=[],CATS=[],STYS=[],loaded=false,loadErr='',msg=null,busy=false;
-let rec=null,rcl=null,ST={},cs='Inicio',gdr=null,gdf=[],dr=null,GP=[],gerr=false,curG=null,ge=null,gdv=null,co='cart',cof=null,ock=null,osig=null,odone=null,OR=null,oerr=false,oload=false,osel=null,oq='',ost='',ctd=null,cts='form',ct0=0,ctoken='',rv0=0;
+let rec=null,rcl=null,ST={},cs='Inicio',gdr=null,gdf=[],dr=null,GP=[],gerr=false,curG=null,ge=null,gdv=null,co='cart',cof=null,ock=null,osig=null,odone=null,OR=null,oerr=false,oload=false,osel=null,oq='',ost='activos',ctd=null,cts='form',ct0=0,ctoken='',rv0=0;
 const EMPTY='<p class="mut">Pronto vas a ver acá las piezas de Mariel.</p>';
 const PH={id:1,cod:'-',n:'',cat:'Tazas',est:'',st:1,st2:'Disponible'};
 const cols=['#e9ddf5','#f7dce8','#d8c4ef','#f3e3f0','#e4d6f3','#f9e6ef'];
@@ -375,10 +375,17 @@ async function sendContact(ev){ev.preventDefault();if(busy)return;const v={};for
 function tsInit(){const el=$('#ts');if(!el)return;const run=()=>{ctoken='';window.turnstile.render(el,{sitekey:CFG.turnstileSiteKey,callback:t=>{ctoken=t},'expired-callback':()=>{ctoken=''}})};if(window.turnstile)return run();if(!document.getElementById('tsjs')){const sc=document.createElement('script');sc.id='tsjs';sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';sc.onload=run;document.head.appendChild(sc)}}
 const OST=[['pendiente_confirmacion','Pendiente de confirmación'],['confirmado','Confirmado'],['en_preparacion','En preparación'],['listo_para_entregar','Listo para entregar'],['enviado','Enviado'],['entregado','Entregado'],['cancelado','Cancelado']];
 const ostL=k=>(OST.find(x=>x[0]===k)||[k,k])[1];
-const fdt=d=>new Date(d).toLocaleString('es-AR');
+const fdt=d=>new Date(d).toLocaleString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
 async function ordLoad(){if(oload)return;oload=true;const r=await sb.from('orders').select('*,order_items(*),order_status_history(*)').order('created_at',{ascending:false}).limit(300);oload=false;if(r.error){oerr=true;OR=[]}else{oerr=false;OR=r.data}render()}
-function ordList(){const q=oq.trim().toLowerCase(),l=(OR||[]).filter(o=>(!ost||o.status===ost)&&(!q||[o.order_number,o.customer_name,o.customer_email,o.customer_phone].join(' ').toLowerCase().includes(q)));
- return `<div class="wrap"><table><tr><th>N.º</th><th>Fecha</th><th>Comprador</th><th>Total</th><th>Entrega</th><th>Estado</th><th></th></tr>${l.map(o=>`<tr><td>${esc(o.order_number)}</td><td>${fdt(o.created_at)}</td><td>${esc(o.customer_name)}</td><td>${money(Number(o.total))}</td><td>${o.delivery_method==='envio'?'Envío':'Retiro'}</td><td>${ostL(o.status)}</td><td><button class="chip" onclick="osel='${o.id}';render()">Ver</button></td></tr>`).join('')||'<tr><td colspan="7" class="mut">No hay pedidos con esos filtros.</td></tr>'}</table></div>`}
+function ordList(){
+ const q=oq.trim().toLowerCase(),digits=q.replace(/\D/g,'');
+ const l=(OR||[]).filter(o=>{
+  const statusOk=ost==='activos'? !['cancelado','entregado'].includes(o.status):(!ost||o.status===ost);
+  const text=[o.order_number,o.customer_name,o.customer_email,o.customer_phone].join(' ').toLowerCase();
+  const phoneDigits=String(o.customer_phone||'').replace(/\D/g,'');
+  return statusOk&&(!q||text.includes(q)||(digits.length>=3&&phoneDigits.includes(digits)));
+ });
+ return `<div class="wrap"><table><tr><th>N.º</th><th>Fecha</th><th>Comprador</th><th>Teléfono</th><th>Correo electrónico</th><th>Total</th><th>Entrega</th><th>Estado</th><th></th></tr>${l.map(o=>`<tr><td>${esc(o.order_number)}</td><td style="white-space:nowrap">${fdt(o.created_at)}</td><td>${esc(o.customer_name)}</td><td style="white-space:nowrap">${esc(o.customer_phone||'')}</td><td>${esc(o.customer_email||'')}</td><td>${money(Number(o.total))}</td><td>${o.delivery_method==='envio'?'Envío':'Retiro'}</td><td>${ostL(o.status)}</td><td><button class="chip" onclick="osel='${o.id}';render()">Ver</button></td></tr>`).join('')||'<tr><td colspan="9" class="mut">No hay pedidos con esos filtros.</td></tr>'}</table></div>`}
 const ordUp=()=>{const e=$('#ol');if(e)e.innerHTML=ordList()};
 function ordAdmin(){if(adm!=='Pedidos')return'';if(OR===null){if(!oload)setTimeout(ordLoad,0);return'<p class="mut">Cargando pedidos…</p>'}
  if(oerr)return '<div class="note"><b>Falta crear la estructura de pedidos en Supabase.</b> Ejecutá los pasos 10 y 11 de los archivos SQL de pedidos y recargá la página.</div>';
@@ -391,7 +398,7 @@ function ordAdmin(){if(adm!=='Pedidos')return'';if(OR===null){if(!oload)setTimeo
 <h3>Estado</h3>${fin?'<p class="mut">Este pedido está en un estado final y no se puede cambiar.</p>':`<div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:12px 0"><div style="width:240px;max-width:100%"><label for="os">Nuevo estado</label><select id="os">${OST.filter(x=>x[0]!==o.status).map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select></div><button class="btn" ${busy?'disabled':''} onclick="ordStatus('${o.id}')">Cambiar estado</button></div><div style="max-width:600px"><label for="on">Nota del cambio (opcional)</label><input id="on" maxlength="500"></div><p class="mut">Cancelar devuelve las cantidades al stock.</p>`}
 <h3>Observaciones internas</h3><div class="f"><div class="full"><textarea id="oi" rows="3" maxlength="4000">${esc(o.internal_notes||'')}</textarea></div><div class="full"><button class="btn alt" ${busy?'disabled':''} onclick="ordNotes('${o.id}')">Guardar observaciones</button></div></div>
 <h3>Historial</h3><div class="wrap"><table>${hs.map(h=>`<tr><td>${fdt(h.created_at)}</td><td>${h.from_status?ostL(h.from_status)+' → ':''}${ostL(h.to_status)}</td><td>${esc(h.note||'')}</td></tr>`).join('')}</table></div>`}
- return `<div class="f"><div class="full"><input placeholder="Buscar por número, comprador o teléfono" value="${esc(oq)}" oninput="oq=this.value;ordUp()"></div><div class="full"><select onchange="ost=this.value;ordUp()"><option value="">Todos los estados</option>${OST.map(x=>`<option value="${x[0]}" ${ost===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select></div></div><br><div id="ol">${ordList()}</div>`}
+ return `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px"><div style="flex:2 1 320px;min-width:220px"><input aria-label="Buscar pedidos" placeholder="Buscar por número, comprador, teléfono o correo" value="${esc(oq)}" oninput="oq=this.value;ordUp()"></div><div style="flex:1 1 230px;min-width:210px"><select aria-label="Filtrar por estado" onchange="ost=this.value;ordUp()"><option value="activos" ${ost==='activos'?'selected':''}>Pendientes y en curso (sin entregados ni cancelados)</option><option value="" ${ost===''?'selected':''}>Todos los estados</option>${OST.map(x=>`<option value="${x[0]}" ${ost===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select></div></div><div id="ol">${ordList()}</div>`}
 const ordMsg=e=>{const c=((e&&e.message)||'').split('|')[0];return c==='final_status'?'Ese pedido está en un estado final y no se puede cambiar.':c==='same_status'?'El pedido ya tiene ese estado.':c==='order_not_found'?'No se encontró el pedido.':null};
 async function ordStatus(id){if(busy)return;const o=(OR||[]).find(x=>x.id===id);if(!o)return;const st=$('#os').value,note=$('#on').value;if(st==='cancelado'&&!confirm('¿Cancelar el pedido '+o.order_number+'? Las cantidades reservadas vuelven al stock.'))return;
  busy=true;const r=await sb.rpc('admin_set_order_status',{p_order:id,p_status:st,p_note:note});busy=false;
